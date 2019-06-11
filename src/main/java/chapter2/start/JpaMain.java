@@ -1,16 +1,14 @@
 package chapter2.start;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import common.Member;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * @author holyeye
  */
 public class JpaMain {
-
 	public static void main(String[] args) {
 
 		//엔티티 매니저 팩토리 생성
