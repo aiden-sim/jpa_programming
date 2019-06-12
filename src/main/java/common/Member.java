@@ -7,19 +7,24 @@ import java.util.Date;
 
 @Entity
 @DynamicUpdate
-@Table(name = "MEMBER")
+@Table(name = "MEMBER", uniqueConstraints = { @UniqueConstraint(
+		name = "NAME_AGE_UNIQUE",
+		columnNames = { "NAME", "AGE" }) })
 public class Member {
+
+
 	@Id
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID")
 	private String id;
 
-	@Column(name = "NAME")
+	@Column(name = "NAME", nullable = false, length = 10)
 	private String username;
 
 	private Integer age;
 
 	@Enumerated(EnumType.STRING)
-	private RoleType type;
+	private RoleType roleType;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
@@ -54,12 +59,12 @@ public class Member {
 		this.age = age;
 	}
 
-	public RoleType getType() {
-		return type;
+	public RoleType getRoleType() {
+		return roleType;
 	}
 
-	public void setType(RoleType type) {
-		this.type = type;
+	public void setType(RoleType roleType) {
+		this.roleType = roleType;
 	}
 
 	public Date getCreateDate() {

@@ -33,7 +33,6 @@ public class JpaMain {
 	}
 
 	public static void logic(EntityManager em) {
-
 		String id = "id1";
 		Member member = new Member();
 		member.setId(id);
