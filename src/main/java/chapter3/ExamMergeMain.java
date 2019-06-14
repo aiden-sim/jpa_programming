@@ -1,7 +1,5 @@
 package chapter3;
 
-import common.Member;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;

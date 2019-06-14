@@ -1,15 +1,18 @@
-package common;
+package chapter4;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+/**
+ * 예제 실행시 주석 해제
+ */
+/*@Entity
 @DynamicUpdate
 @Table(name = "MEMBER", uniqueConstraints = { @UniqueConstraint(
 		name = "NAME_AGE_UNIQUE",
-		columnNames = { "NAME", "AGE" }) })
+		columnNames = { "NAME", "AGE" }) })*/
 public class Member {
 
 

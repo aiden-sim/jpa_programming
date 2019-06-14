@@ -1,7 +1,5 @@
 package chapter3;
 
-import common.Member;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -22,6 +20,13 @@ public class JpaMain {
 
 		try {
 			transaction.begin(); //트랜잭션 시작
+			Member member = new Member();
+			member.setId("memberA");
+			member.setUsername("지한");
+			member.setAge(2);
+
+			//등록
+			em.persist(member);
 
 			// 영속 엔티티 조회
 			Member memberA = em.find(Member.class, "memberA");
