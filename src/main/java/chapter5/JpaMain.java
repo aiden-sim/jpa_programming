@@ -19,10 +19,12 @@ public class JpaMain {
             JpaMain jpa = new JpaMain();
             jpa.testSave(em);
             jpa.testSelect(em);
+            jpa.biDirection(em);
             jpa.queryLogicJoin(em);
             jpa.updateRelation(em);
             jpa.deleteRelation(em);
             jpa.deleteTeam(em);
+
 
             transaction.commit();//트랜잭션 커밋
         } catch (Exception e) {
@@ -98,5 +100,14 @@ public class JpaMain {
         //삭제시 연관관계 제거해 주어야 함.
         member3.setTeam(null);
         em.remove(team3);
+    }
+
+    private void biDirection(EntityManager em) {
+        Team team = em.find(Team.class, "team1");
+        List<Member> members = team.getMembers(); // 팀 -> 회원 객체 그래프 탐색
+
+        for (Member member : members) {
+            System.out.println("member.username = " + member.getUsername());
+        }
     }
 }
