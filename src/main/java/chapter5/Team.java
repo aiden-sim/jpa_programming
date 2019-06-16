@@ -15,6 +15,8 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<Member>();
 
+    public Team(){}
+
     public Team(String id, String name) {
         this.id = id;
         this.name = name;

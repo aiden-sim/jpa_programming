@@ -25,7 +25,6 @@ public class JpaMain {
             jpa.deleteRelation(em);
             jpa.deleteTeam(em);
 
-
             transaction.commit();//트랜잭션 커밋
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,6 +105,7 @@ public class JpaMain {
         Team team = em.find(Team.class, "team1");
         List<Member> members = team.getMembers(); // 팀 -> 회원 객체 그래프 탐색
 
+        // 실제 db에 데이터가 없으면 가지고 오지 못햇다. 캐시에서 못가지고 오나?
         for (Member member : members) {
             System.out.println("member.username = " + member.getUsername());
         }
