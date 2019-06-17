@@ -25,6 +25,7 @@ public class JpaMain {
 			jpa.deleteRelation(em);
 			jpa.deleteTeam(em);
 			jpa.testSaveNonOwner(em);
+			jpa.testORM_양방향(em);
 
 			transaction.commit();//트랜잭션 커밋
 		} catch (Exception e) {
@@ -121,11 +122,30 @@ public class JpaMain {
 		Member member5 = new Member("member5", "회원5");
 		em.persist(member5);
 
-		Team team4 = new Team("team4", "팀3");
+		Team team4 = new Team("team4", "팀4");
 		// 주인이 아닌 곳만 연관관계 설정
-		team4.getMembers().add(member4);
-		team4.getMembers().add(member5);
+		//team4.getMembers().add(member4);
+		//team4.getMembers().add(member5);
 
 		em.persist(team4);
+	}
+
+	private void testORM_양방향(EntityManager em) {
+		Team team5 = new Team("team5", "팀5");
+		em.persist(team5);
+
+		Member member6 = new Member("member6", "회원6");
+
+		// 양방향 연관관계 설정
+		member6.setTeam(team5);          //연관관계 설정 member -> team
+		//team5.getMembers().add(member6); //연관관계 설정 team -> member
+		em.persist(member6);
+
+		Member member7 = new Member("member7", "회원7");
+
+		// 양방향 연관관계 설정
+		member7.setTeam(team5);          //연관관계 설정 member -> team
+		//team5.getMembers().add(member7); //연관관계 설정 team -> member
+		em.persist(member7);
 	}
 }
