@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+/**
+ * 예제 실행시 주석 해제
+ */
+//@Entity
 public class Team {
     @Id
     @Column(name = "TEAM_ID")

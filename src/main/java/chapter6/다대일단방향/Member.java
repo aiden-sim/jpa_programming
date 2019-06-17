@@ -1,4 +1,4 @@
-package chapter5;
+package chapter6.다대일단방향;
 
 import javax.persistence.*;
 
@@ -7,30 +7,21 @@ import javax.persistence.*;
  */
 //@Entity
 public class Member {
-	@Id
+	@Id @GeneratedValue
 	@Column(name = "MEMBER_ID")
-	private String id;
+	private Long id;
+
 	private String username;
 
-	//연관관계 매핑
 	@ManyToOne
 	@JoinColumn(name = "TEAM_ID")
 	private Team team;
 
-	public Member() {
-	}
-
-	public Member(String id, String username) {
-		this.id = id;
-		this.username = username;
-	}
-
-	// 연관관계 설정
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -47,14 +38,6 @@ public class Member {
 	}
 
 	public void setTeam(Team team) {
-		// 기존 팀과 관계를 제거
-		if (this.team != null) {
-			this.team.getMembers().remove(this);
-		}
-
 		this.team = team;
-		if (team != null) {
-			team.getMembers().add(this);
-		}
 	}
 }
