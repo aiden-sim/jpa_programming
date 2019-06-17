@@ -18,13 +18,13 @@ public class JpaMain {
 
 			JpaMain jpa = new JpaMain();
 			jpa.testSave(em);
-			jpa.testSaveNonOwner(em);
-			/*jpa.testSelect(em);
+			jpa.testSelect(em);
 			jpa.biDirection(em);
 			jpa.queryLogicJoin(em);
 			jpa.updateRelation(em);
 			jpa.deleteRelation(em);
-			jpa.deleteTeam(em);*/
+			jpa.deleteTeam(em);
+			jpa.testSaveNonOwner(em);
 
 			transaction.commit();//트랜잭션 커밋
 		} catch (Exception e) {
@@ -113,18 +113,19 @@ public class JpaMain {
 	}
 
 	private void testSaveNonOwner(EntityManager em) {
-		// 회원 3 저장
-		Member member3 = new Member("member3", "회원3");
-		em.persist(member3);
-
+		// 회원 4 저장
 		Member member4 = new Member("member4", "회원4");
 		em.persist(member4);
 
-		Team team3 = new Team("team3", "팀3");
-		// 주인이 아닌 곳만 연관관계 설정
-		team3.getMembers().add(member3);
-		team3.getMembers().add(member4);
+		// 회원 5 저장
+		Member member5 = new Member("member5", "회원5");
+		em.persist(member5);
 
-		em.persist(team3);
+		Team team4 = new Team("team4", "팀3");
+		// 주인이 아닌 곳만 연관관계 설정
+		team4.getMembers().add(member4);
+		team4.getMembers().add(member5);
+
+		em.persist(team4);
 	}
 }
