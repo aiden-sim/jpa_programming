@@ -2,7 +2,7 @@ package chapter4;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 @TableGenerator(
 		name = "BOARD_SEQ_GENERATOR",
 		table = "MY_SEQUENCES",
