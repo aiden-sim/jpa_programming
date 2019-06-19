@@ -2,7 +2,7 @@ package chapter6.다대다기본키;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Orders {
 	@Id @GeneratedValue
 	@Column(name = "ORDER_ID")

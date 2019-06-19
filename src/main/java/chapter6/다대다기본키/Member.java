@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Member {
 	@Id @Column(name = "MEMBER_ID")
 	private String id;

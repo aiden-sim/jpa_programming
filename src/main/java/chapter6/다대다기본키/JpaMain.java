@@ -1,7 +1,5 @@
 package chapter6.다대다기본키;
 
-import org.hibernate.criterion.Order;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
