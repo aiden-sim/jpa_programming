@@ -3,8 +3,8 @@ package chapter7.joined;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue("A")
+/*@Entity
+@DiscriminatorValue("A")*/
 public class Album extends Item {
 	private String artist;
 

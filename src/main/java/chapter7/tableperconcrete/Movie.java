@@ -1,4 +1,6 @@
-package chapter7.joined;
+package chapter7.tableperconcrete;
+
+import chapter7.joined.Item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
