@@ -3,7 +3,7 @@ package chapter7.복합키와식별관계매핑.compositekey.식별.일대일;
 import javax.persistence.*;
 
 //부모
-@Entity
+//@Entity
 public class Board {
 	@Id @GeneratedValue
 	@Column(name = " BOARD_ID")

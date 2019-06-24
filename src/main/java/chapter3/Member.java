@@ -8,8 +8,8 @@ import javax.persistence.Table;
 /**
  * 예제 실행시 주석 해제
  */
-/*@Entity
-@Table(name="MEMBER")*/
+@Entity
+@Table(name="MEMBER")
 public class Member {
 
 	@Id

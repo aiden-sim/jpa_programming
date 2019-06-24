@@ -2,7 +2,7 @@ package chapter7.조인테이블.일대일조인테이블;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Parent {
 	@Id @GeneratedValue
 	@Column(name = "PARENT_ID")

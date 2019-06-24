@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 //자식
-@Entity
+//@Entity
 public class Child {
 	@Id @GeneratedValue
 	@Column(name = "CHILD_ID")

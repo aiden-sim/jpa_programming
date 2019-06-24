@@ -3,7 +3,7 @@ package chapter7.복합키와식별관계매핑.compositekey.식별.일대일;
 import javax.persistence.*;
 
 //자식
-@Entity
+//@Entity
 public class BoardDetail {
 	@Id
 	private Long boardId;

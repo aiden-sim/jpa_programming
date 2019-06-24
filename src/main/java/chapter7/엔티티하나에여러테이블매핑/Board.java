@@ -2,7 +2,7 @@ package chapter7.엔티티하나에여러테이블매핑;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 @Table(name = "BOARD")
 @SecondaryTable(name = "BOARD_DETAIL",
 		pkJoinColumns = @PrimaryKeyJoinColumn(name = "BOARD_DETAIL_ID"))
