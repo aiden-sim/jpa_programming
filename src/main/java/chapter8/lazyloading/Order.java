@@ -3,7 +3,7 @@ package chapter8.lazyloading;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class Order {
 	private String id;
 

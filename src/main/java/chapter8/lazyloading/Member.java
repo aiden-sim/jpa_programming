@@ -3,7 +3,7 @@ package chapter8.lazyloading;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Member {
 
 	@Id
