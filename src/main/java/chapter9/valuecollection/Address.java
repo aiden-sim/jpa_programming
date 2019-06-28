@@ -3,7 +3,7 @@ package chapter9.valuecollection;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@Embeddable
+//@Embeddable
 public class Address {
 	@Column
 	private String city;

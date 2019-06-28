@@ -3,7 +3,7 @@ package chapter9.embeddedtype.relation;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
-@Embeddable
+//@Embeddable
 public class Address {
 	String street;
 	String city;

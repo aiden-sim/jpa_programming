@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Embeddable
+//@Embeddable
 public class GranChildId implements Serializable {
 	private ChildId childId; // @MapsId("childId")로 매핑
 

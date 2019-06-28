@@ -1,4 +1,4 @@
-package chapter10.criteria;
+package chapter10.querydsl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

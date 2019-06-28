@@ -3,7 +3,7 @@ package chapter9.embeddedtype.relation;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
-@Embeddable
+//@Embeddable
 public class PhoneNumber {
 	String areaCode;
 	String localNumber;

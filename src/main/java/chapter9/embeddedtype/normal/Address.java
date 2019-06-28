@@ -3,7 +3,7 @@ package chapter9.embeddedtype.normal;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@Embeddable
+//@Embeddable
 public class Address {
 	@Column(name = "city")
 	private String city;
