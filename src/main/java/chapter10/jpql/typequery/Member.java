@@ -1,4 +1,4 @@
-package chapter10.nativequery;
+package chapter10.jpql.typequery;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.Id;
 /**
  * 예제 실행시 주석 해제
  */
-//@Entity
+@Entity
 public class Member {
     @Id
     @Column(name = "ID")

@@ -1,4 +1,4 @@
-package chapter10.nativequery;
+package chapter10.jpql.query;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
