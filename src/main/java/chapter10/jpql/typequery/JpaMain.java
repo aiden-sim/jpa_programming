@@ -16,6 +16,7 @@ public class JpaMain {
             logic(em);  //비즈니스 로직
             naemdParameters(em);
             positionalParameters(em);
+            newCommand(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -64,5 +65,12 @@ public class JpaMain {
                 em.createQuery("SELECT m FROM Member m where m.username = ?1", Member.class)
                         .setParameter(1, usernameParam)
                         .getResultList();
+    }
+
+    private static void newCommand(EntityManager em) {
+        TypedQuery<UserDTO> query = em.createQuery("SELECT new chapter10.jpql.typequery.UserDTO(m.username, m.age) FROM Member m",
+                UserDTO.class);
+
+        List<UserDTO> resultList = query.getResultList();
     }
 }
