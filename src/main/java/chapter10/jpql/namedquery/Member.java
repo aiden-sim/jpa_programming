@@ -1,13 +1,14 @@
-package chapter10.criteria;
+package chapter10.jpql.namedquery;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 예제 실행시 주석 해제
  */
-//@Entity
+/*@Entity
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.username = :username")*/
 public class Member {
     @Id
     @Column(name = "ID")

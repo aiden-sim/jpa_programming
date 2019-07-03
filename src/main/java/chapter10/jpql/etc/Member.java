@@ -1,4 +1,4 @@
-package chapter10.etc;
+package chapter10.jpql.etc;
 
 import javax.persistence.*;
 
