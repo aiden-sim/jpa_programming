@@ -19,6 +19,13 @@ public class JpaMain {
             select(em); // 기본
             where(em); // 검색 조건 추가
             greaterThan(em);
+            distinct(em); // 중복제거
+            construct(em); // 생성자 구문
+            tuple(em); // 튜플
+            groupby(em); // group by
+            having(em);  // having
+            join(em);    // join
+            subquery(em); //subquery
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -49,6 +56,14 @@ public class JpaMain {
 
         //등록
         em.persist(member2);
+
+        Team team = new Team();
+        team.setName("team1");
+        team.getMembers().add(member);
+        team.getMembers().add(member2);
+        member.setTeam(team);
+        member2.setTeam(team);
+        em.persist(team);
 
         //조회
         //Criteria 사용 준비
@@ -108,5 +123,110 @@ public class JpaMain {
         cq.where(ageGt);
         cq.orderBy(cb.desc(m.get("age")));
         List<Member> members = em.createQuery(cq).getResultList();
+    }
+
+    private static void distinct(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+        Root<Member> m = cq.from(Member.class);
+        cq.multiselect(m.get("username"), m.get("age")).distinct(true);
+        //cq.select(cb.array(m.get("username"), m.get("age"))).distinct(true);
+
+        TypedQuery<Object[]> query = em.createQuery(cq);
+        List<Object[]> resultList = query.getResultList();
+    }
+
+    private static void construct(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<MemberDTO> cq = cb.createQuery(MemberDTO.class);
+        Root<Member> m = cq.from(Member.class);
+
+        cq.select(cb.construct(MemberDTO.class, m.get("username"), m.get("age"))); // 생성자 위치로 매핑하는듯
+
+        TypedQuery<MemberDTO> query = em.createQuery(cq);
+        List<MemberDTO> resultList = query.getResultList();
+    }
+
+    private static void tuple(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Tuple> cq = cb.createTupleQuery();
+        // CriteriaQuery<Tuple> cq = cb.createQuery(Tuple.class);
+
+        Root<Member> m = cq.from(Member.class);
+        cq.multiselect(
+                m.get("username").alias("username"), // 튜플 별칭
+                m.get("age").alias("age")
+        );
+
+        TypedQuery<Tuple> query = em.createQuery(cq);
+        List<Tuple> resultList = query.getResultList();
+        for (Tuple tuple : resultList) {
+            // 튜플 별칭으로 조회
+            String username = tuple.get("username", String.class);
+            Integer age = tuple.get("age", Integer.class);
+        }
+    }
+
+    private static void groupby(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+        Root<Member> m = cq.from(Member.class);
+
+        Expression maxAge = cb.max(m.<Integer>get("age"));
+        Expression minAge = cb.min(m.<Integer>get("age"));
+
+        cq.multiselect(m.get("team").get("name"), maxAge, minAge);
+        cq.groupBy(m.get("team").get("name")); // group by
+
+        TypedQuery<Object[]> query = em.createQuery(cq);
+        List<Object[]> resultList = query.getResultList();
+    }
+
+    private static void having(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+        Root<Member> m = cq.from(Member.class);
+
+        Expression maxAge = cb.max(m.<Integer>get("age"));
+        Expression minAge = cb.min(m.<Integer>get("age"));
+
+        cq.multiselect(m.get("team").get("name"), maxAge, minAge);
+        cq.groupBy(m.get("team").get("name"));
+        cq.having(cb.gt(minAge, 10));
+
+        TypedQuery<Object[]> query = em.createQuery(cq);
+        List<Object[]> resultList = query.getResultList();
+    }
+
+    private static void join(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+        Root<Member> m = cq.from(Member.class);
+        Join<Member, Team> t = m.join("team", JoinType.INNER.INNER); // 내부 조인
+
+        cq.multiselect(m, t)
+                .where(cb.equal(t.get("name"), "team1"));
+
+        TypedQuery<Object[]> query = em.createQuery(cq);
+        List<Object[]> resultList = query.getResultList();
+    }
+
+    private static void subquery(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Member> mainQuery = cb.createQuery(Member.class);
+
+        Subquery<Double> subquery = mainQuery.subquery(Double.class);
+
+        // 서브 쿼리
+        Root<Member> m2 = subquery.from(Member.class);
+        subquery.select(cb.avg(m2.<Integer>get("age")));
+
+        // 메인 쿼리
+        Root<Member> m = mainQuery.from(Member.class);
+        mainQuery.select(m)
+                .where(cb.ge(m.<Integer>get("age"), subquery));
+
+        TypedQuery<Member> query = em.createQuery(mainQuery);
+        List<Member> resultList = query.getResultList();
     }
 }
