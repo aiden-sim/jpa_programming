@@ -1,17 +1,15 @@
-package chapter10.jpql.typequery;
+package chapter10.etc;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 예제 실행시 주석 해제
  */
 //@Entity
 public class Team {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "TEAM_ID")
     private Long id;
 

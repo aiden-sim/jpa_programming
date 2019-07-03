@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * 예제 실행시 주석 해제
  */
-@Entity
+//@Entity
 public class Member {
 	@Id
 	@Column(name = "ID")
