@@ -2,6 +2,7 @@ package chapter10.criteria.base;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JpaMain {
@@ -28,6 +29,10 @@ public class JpaMain {
 			subquery(em); //subquery
 			in(em);         // in
 			selectCase(em); // case
+			parameter(em);  // parameter
+			nativeMethod(em); // native
+			dynamicQuery(em); // 동적 쿼리
+			criteriaDynamicQuery(em); // criteria 동적 쿼리
 			tx.commit();//트랜잭션 커밋
 
 		} catch (Exception e) {
@@ -260,5 +265,128 @@ public class JpaMain {
 
 		TypedQuery<Object[]> query = em.createQuery(cq);
 		List<Object[]> resultList = query.getResultList();
+	}
+
+	private static void parameter(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Member> cq = cb.createQuery(Member.class);
+
+		Root<Member> m = cq.from(Member.class);
+
+		cq.select(m)
+				.where(cb.equal(m.get("username"), cb.parameter(String.class, "usernameParma")));
+
+		List<Member> resultList = em.createQuery(cq)
+				.setParameter("usernameParma", "kim")
+				.getResultList();
+	}
+
+	private static void nativeMethod(EntityManager em) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+
+		Root<Member> m = cq.from(Member.class);
+		Expression<Long> function = cb.function("SUM", Long.class, m.get("age"));
+		cq.select(function);
+
+		// h2는 지원 안되나?
+		//TypedQuery<Long> typedQuery = em.createQuery(cq);
+		//long result = typedQuery.getSingleResult().longValue();
+	}
+
+	private static void dynamicQuery(EntityManager em) {
+		// 검색 조건
+		Integer age = 10;
+		String username = null;
+		String teamName = "팀A";
+
+		//JPQL 동적 쿼리 생성
+		StringBuilder jpql = new StringBuilder("select m from Member m join m.team t ");
+		List<String> criteria = new ArrayList<String>();
+
+		if (age != null) {
+			criteria.add(" m.age = :age ");
+		}
+
+		if (username != null) {
+			criteria.add(" m.username = :username ");
+		}
+
+		if (teamName != null) {
+			criteria.add(" t.name = :teamName ");
+		}
+
+		if (criteria.size() > 0) {
+			jpql.append(" where ");
+		}
+
+		for (int i = 0; i < criteria.size(); i++) {
+			if (i > 0) {
+				jpql.append(" and ");
+			}
+			jpql.append(criteria.get(i));
+		}
+
+		TypedQuery<Member> query = em.createQuery(jpql.toString(), Member.class);
+
+		if (age != null) {
+			query.setParameter("age", age);
+		}
+
+		if (username != null) {
+			query.setParameter("username", username);
+		}
+
+		if (teamName != null) {
+			query.setParameter("teamName", teamName);
+		}
+
+		List<Member> resultList = query.getResultList();
+	}
+
+	private static void criteriaDynamicQuery(EntityManager em) {
+		// 검색 조건
+		Integer age = 10;
+		String username = null;
+		String teamName = "팀A";
+
+		// Criteria 동적 쿼리 생성
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Member> cq = cb.createQuery(Member.class);
+
+		Root<Member> m = cq.from(Member.class);
+		Join<Member, Team> t = m.join("team");
+
+		List<Predicate> criteria = new ArrayList<Predicate>();
+
+		if (age != null) {
+			criteria.add(cb.equal(m.<Integer>get("age"), cb.parameter(Integer.class, "age")));
+		}
+
+		if (username != null) {
+			criteria.add(cb.equal(m.get("username"), cb.parameter(String.class, "username")));
+		}
+
+		if (teamName != null) {
+			criteria.add(cb.equal(t.get("name"), cb.parameter(String.class, "teamName")));
+		}
+
+		cq.where(cb.and(criteria.toArray(new Predicate[0])));
+
+		TypedQuery<Member> query = em.createQuery(cq);
+
+		if (age != null) {
+			query.setParameter("age", age);
+		}
+
+		if (username != null) {
+			query.setParameter("username", username);
+		}
+
+		if (teamName != null) {
+			query.setParameter("teamName", teamName);
+		}
+
+		List<Member> resultList = query.getResultList();
 	}
 }
