@@ -1,8 +1,6 @@
 package chapter10.querydsl;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 예제 실행시 주석 해제
@@ -13,10 +11,13 @@ public class Member {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "NAME", nullable = false, length = 10)
     private String username;
 
     private Integer age;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    private Team team;
 
     public String getId() {
         return id;
@@ -32,6 +33,19 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+
+        // 무한루프에 빠지지 않도록
+        if (!team.getMembers().contains(this)) {
+            team.getMembers().add(this);
+        }
     }
 
     public Integer getAge() {
