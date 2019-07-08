@@ -1,4 +1,4 @@
-package chapter10.querydsl;
+package chapter10.nativequery;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 예제 실행시 주석 해제
  */
-//@Entity
+@Entity
 public class Team {
     @Id
     @GeneratedValue

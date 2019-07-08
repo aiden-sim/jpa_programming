@@ -16,8 +16,9 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class JpaMain {
+	// 메타 파일 때문에 주석.. 실제 사용할때 풀어서 사용하자
+    /*
     public static void main(String[] args) {
-
         //엔티티 매니저 팩토리 생성
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
         EntityManager em = emf.createEntityManager(); //엔티티 매니저 생성
@@ -129,11 +130,11 @@ public class JpaMain {
         QMember qMember = QMember.member;
 
         //쿼리, 결과 조회
-/*        List<Member> members =
+        List<Member> members =
                 query.selectFrom(qMember)
                         .groupBy(qMember.age)
                         .having(qMember.age.gt(5))
-                        .fetch();*/
+                        .fetch();
     }
 
     private static void join(EntityManager em) {
@@ -208,4 +209,5 @@ public class JpaMain {
                 .where(qMember.isGraterThen(5))
                 .fetch();
     }
+    */
 }
