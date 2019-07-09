@@ -1,7 +1,5 @@
 package chapter10.nativequery;
 
-import chapter8.lazyloading.Order;
-
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
@@ -20,7 +18,10 @@ public class JpaMain {
 			logic(em);  //비즈니스 로직
 			entitySelect(em); // 엔티티 조회
 			valueSelect(em);  // 값 조회
-			resultMapping(em); // 결과 매핑
+			//resultMapping(em); // 결과 매핑
+			//namedQuery(em);    // NamedNative
+			nativeQueryWithResultMapping(em); // resultMapping + namedNative
+			xmlQuery(em);      // xml
 			tx.commit();//트랜잭션 커밋
 
 		} catch (Exception e) {
@@ -104,6 +105,40 @@ public class JpaMain {
 
 		Query nativeQuery = em.createNativeQuery(sql, "memberWithOrderCount");
 		List<Object[]> resultList = nativeQuery.getResultList();
+		for (Object[] row : resultList) {
+			Member member = (Member) row[0];
+			BigInteger orderCount = (BigInteger) row[1];
+
+			System.out.println("member = " + member);
+			System.out.println("orderCount =  " + orderCount);
+		}
+	}
+
+	private static void namedQuery(EntityManager em) {
+		TypedQuery<Member> nativeQuery = em.createNamedQuery("Member.memberSQL", Member.class)
+				.setParameter(1, 20);
+
+		List<Member> resultList = nativeQuery.getResultList();
+		for (Member mem : resultList) {
+			System.out.println("member = " + mem);
+		}
+	}
+
+	private static void nativeQueryWithResultMapping(EntityManager em) {
+		List<Object[]> resultList = em.createNamedQuery("Member.memberWithOrderCount")
+				.getResultList();
+		for (Object[] row : resultList) {
+			Member member = (Member) row[0];
+			BigInteger orderCount = (BigInteger) row[1];
+
+			System.out.println("member = " + member);
+			System.out.println("orderCount =  " + orderCount);
+		}
+	}
+
+	private static void xmlQuery(EntityManager em) {
+		List<Object[]> resultList = em.createNamedQuery("Member.memberWithOrderCountByXml")
+				.getResultList();
 		for (Object[] row : resultList) {
 			Member member = (Member) row[0];
 			BigInteger orderCount = (BigInteger) row[1];
