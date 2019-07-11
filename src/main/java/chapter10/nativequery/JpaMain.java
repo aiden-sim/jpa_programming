@@ -21,9 +21,10 @@ public class JpaMain {
 			//resultMapping(em); // 결과 매핑
 			//namedQuery(em);    // NamedNative
 			nativeQueryWithResultMapping(em); // resultMapping + namedNative
-			xmlQuery(em);      // xml
+			xmlQuery(em);        // xml
+			//storedProcedure(em); // SP
+			//sotredProcedureByParameter(em); // SP 파라미터 형태
 			tx.commit();//트랜잭션 커밋
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			tx.rollback(); //트랜잭션 롤백
@@ -146,5 +147,39 @@ public class JpaMain {
 			System.out.println("member = " + member);
 			System.out.println("orderCount =  " + orderCount);
 		}
+	}
+
+	/*
+	프로시저
+	DELIMTER //
+
+	CREATE PROCEDURE proc_multiply (INOUT inParam INT, INOUT outParam INT)
+	BEGIN
+	SET out Param = inParam *2;
+	END //
+	*/
+
+	private static void storedProcedure(EntityManager em) {
+		StoredProcedureQuery spq = em.createStoredProcedureQuery("proc_multiply");
+		spq.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
+		spq.registerStoredProcedureParameter(2, Integer.class, ParameterMode.OUT);
+
+		spq.setParameter(1, 100);
+		spq.execute();
+
+		Integer out = (Integer) spq.getOutputParameterValue(2);
+		System.out.println("out = " + out);
+	}
+
+	private static void sotredProcedureByParameter(EntityManager em) {
+		StoredProcedureQuery spq = em.createStoredProcedureQuery("proc_multiply");
+		spq.registerStoredProcedureParameter("inParam", Integer.class, ParameterMode.IN);
+		spq.registerStoredProcedureParameter("outParam", Integer.class, ParameterMode.OUT);
+
+		spq.setParameter("inParam", 100);
+		spq.execute();
+
+		Integer out = (Integer) spq.getOutputParameterValue("outParam");
+		System.out.println("out = " + out);
 	}
 }
