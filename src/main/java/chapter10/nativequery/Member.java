@@ -6,7 +6,7 @@ import javax.persistence.*;
  * 예제 실행시 주석 해제
  */
 
-@Entity
+//@Entity
 /*
 // resultMapping
 @SqlResultSetMapping(name = "memberWithOrderCount",
@@ -22,6 +22,7 @@ import javax.persistence.*;
 		resultClass = Member.class
 )
 */
+/*
 // resultMapping + namedSQL +
 @SqlResultSetMapping(name = "memberWithOrderCount",
 		entities = { @EntityResult(entityClass = Member.class) },
@@ -37,6 +38,7 @@ import javax.persistence.*;
 				"ON M.ID = I.ID",
 		resultSetMapping = "memberWithOrderCount"
 )
+*/
 public class Member {
 	@Id
 	@Column(name = "ID")

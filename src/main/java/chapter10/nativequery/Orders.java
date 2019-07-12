@@ -2,7 +2,7 @@ package chapter10.nativequery;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Orders {
 	@Id @GeneratedValue
 	@Column(name = "ORDER_ID")

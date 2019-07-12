@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" version="2.1">
-    <named-query name="Member.findByUsername">
+ <!--   <named-query name="Member.findByUsername">
         <query>
             <![CDATA[
             select m
@@ -28,5 +28,5 @@
     <sql-result-set-mapping name="memberWithOrderCountResultMap">
         <entity-result entity-class="chapter10.nativequery.Member"/>
         <column-result name="ORDER_COUNT"/>
-    </sql-result-set-mapping>
+    </sql-result-set-mapping>-->
 </entity-mappings>
