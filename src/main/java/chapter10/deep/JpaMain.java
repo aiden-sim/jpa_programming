@@ -51,6 +51,8 @@ public class JpaMain {
         em.createQuery("update Product p set p.price = p.price * 1.1")
                 .executeUpdate();
 
+        //em.refresh(productA); // refresh를 통해 다시 조회 하면 수정 후 데이터 정상 출력
+
         // 출력 결과: 1000
         System.out.println("productA 수정 후 = " + productA.getPrice());
     }
