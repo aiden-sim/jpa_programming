@@ -1,9 +1,6 @@
 package chapter10.deep;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -17,6 +14,7 @@ public class JpaMain {
             tx.begin(); //트랜잭션 시작
             logic(em);
             bulk(em);
+            flush(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -51,9 +49,30 @@ public class JpaMain {
         em.createQuery("update Product p set p.price = p.price * 1.1")
                 .executeUpdate();
 
-        //em.refresh(productA); // refresh를 통해 다시 조회 하면 수정 후 데이터 정상 출력
+        em.refresh(productA); // refresh를 통해 다시 조회 하면 수정 후 데이터 정상 출력
 
         // 출력 결과: 1000
         System.out.println("productA 수정 후 = " + productA.getPrice());
+    }
+
+    private static void flush(EntityManager em) {
+        // 상품 조회 가격은 1000
+        Product product =
+                em.createQuery("select p from Product p where p.name = :name", Product.class)
+                        .setParameter("name", "productA")
+                        .getSingleResult();
+
+        em.setFlushMode(FlushModeType.COMMIT); // 커밋 시에만 플러시
+
+        product.setPrice(2000L);
+
+        // 해결 방법
+        //em.flush(); // 1. flush 직접 호출
+
+        // 가격이 2000원인 상품 조회
+        Product product2 =
+                em.createQuery("select p from Product p where p.price = 2000", Product.class)
+                        .setFlushMode(FlushModeType.AUTO) // 2. setFlushMode() 설정
+                        .getSingleResult();
     }
 }
