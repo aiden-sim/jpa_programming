@@ -1,0 +1,10 @@
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:01 +0900] "GET / HTTP/1.1" 200 2113 http-bio-8080-exec-1 1592
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:01 +0900] "GET /resources/css/jumbotron-narrow.css HTTP/1.1" 200 1490 http-bio-8080-exec-2 38
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:01 +0900] "GET /resources/css/bootstrap.css HTTP/1.1" 200 126696 http-bio-8080-exec-3 86
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:01 +0900] "GET /resources/assets/js/jquery.js HTTP/1.1" 200 93111 http-bio-8080-exec-4 23
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:01 +0900] "GET /resources/js/bootstrap.min.js HTTP/1.1" 200 27731 http-bio-8080-exec-5 43
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:04 +0900] "GET / HTTP/1.1" 200 2113 http-bio-8080-exec-9 6
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:05 +0900] "GET /members/new HTTP/1.1" 404 973 http-bio-8080-exec-10 4
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:10 +0900] "GET /home HTTP/1.1" 404 959 http-bio-8080-exec-10 6
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:20 +0900] "GET / HTTP/1.1" 200 2113 http-bio-8080-exec-10 8
+0:0:0:0:0:0:0:1 - - [26/Jul/2019:17:28:24 +0900] "GET /wait HTTP/1.1" 200 8 http-bio-8080-exec-10 1081
