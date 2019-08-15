@@ -1,5 +1,9 @@
 package chapter15;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +14,8 @@ public class Member {
     @GeneratedValue
     private Long id;
 
+    //@BatchSize(size = 2)
+    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<Order>();
 

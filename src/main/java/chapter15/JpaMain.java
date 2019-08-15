@@ -57,6 +57,7 @@ public class JpaMain {
     }
 
     public static void select(EntityManager em) {
-        List<Member> members = em.createQuery("select m from Member m join fetch m.orders", Member.class).getResultList();
+        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+        //List<Member> members = em.createQuery("select m from Member m join fetch m.orders", Member.class).getResultList();
     }
 }
