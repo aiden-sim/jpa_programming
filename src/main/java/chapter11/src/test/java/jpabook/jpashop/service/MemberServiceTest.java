@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop.service;
 
 
@@ -53,4 +54,4 @@ public class MemberServiceTest {
         //Then
         fail("예외가 발생해야 한다.");
     }
-}
+}*/

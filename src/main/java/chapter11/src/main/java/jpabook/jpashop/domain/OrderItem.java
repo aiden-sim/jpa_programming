@@ -1,12 +1,15 @@
+/*
 package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
 
 import javax.persistence.*;
 
+*/
 /**
  * Created by holyeye on 2014. 3. 11..
- */
+ *//*
+
 @Entity
 @Table(name = "ORDER_ITEM")
 public class OrderItem {
@@ -39,13 +42,17 @@ public class OrderItem {
     }
 
     //==비즈니스 로직==//
-    /** 주문 취소 */
+    */
+/** 주문 취소 *//*
+
     public void cancel() {
         getItem().addStock(count);
     }
 
     //==조회 로직==//
-    /** 주문상품 전체 가격 조회 */
+    */
+/** 주문상품 전체 가격 조회 *//*
+
     public int getTotalPrice() {
         return getOrderPrice() * getCount();
     }
@@ -100,3 +107,4 @@ public class OrderItem {
                 '}';
     }
 }
+*/

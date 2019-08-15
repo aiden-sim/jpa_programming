@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
@@ -8,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+*/
 /**
  * User: HolyEyE
  * Date: 2013. 12. 3. Time: 오전 1:07
- */
+ *//*
+
 @Service
 @Transactional
 public class MemberService {
@@ -19,9 +22,11 @@ public class MemberService {
     @Autowired
     MemberRepository memberRepository;
 
-    /**
+    */
+/**
      * 회원 가입
-     */
+     *//*
+
     public Long join(Member member) {
         validateDuplicateMember(member); //중복 회원 검증
         memberRepository.save(member);
@@ -35,9 +40,11 @@ public class MemberService {
         }
     }
 
-    /**
+    */
+/**
      * 전체 회원 조회
-     */
+     *//*
+
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
@@ -46,3 +53,4 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 }
+*/

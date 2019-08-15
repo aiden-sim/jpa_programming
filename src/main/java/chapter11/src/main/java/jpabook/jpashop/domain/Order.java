@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
@@ -5,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+*/
 /**
  * Created by holyeye on 2014. 3. 11..
- */
+ *//*
+
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -47,7 +50,9 @@ public class Order {
     }
 
     //==비즈니스 로직==//
-    /** 주문 취소 */
+    */
+/** 주문 취소 *//*
+
     public void cancel() {
 
         if (delivery.getStatus() == DeliveryStatus.COMP) {
@@ -61,7 +66,9 @@ public class Order {
     }
 
     //==조회 로직==//
-    /** 전체 주문 가격 조회 */
+    */
+/** 전체 주문 가격 조회 *//*
+
     public int getTotalPrice() {
         int totalPrice = 0;
         for (OrderItem orderItem : orderItems) {
@@ -136,3 +143,4 @@ public class Order {
                 '}';
     }
 }
+*/

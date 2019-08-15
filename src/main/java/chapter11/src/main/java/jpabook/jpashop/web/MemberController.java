@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop.web;
 
 import jpabook.jpashop.domain.Address;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
+*/
 /**
  * User: HolyEyE
  * Date: 2013. 12. 4. Time: 오후 9:07
- */
+ *//*
+
 @Controller
 public class MemberController {
 
@@ -45,3 +48,4 @@ public class MemberController {
     }
 
 }
+*/

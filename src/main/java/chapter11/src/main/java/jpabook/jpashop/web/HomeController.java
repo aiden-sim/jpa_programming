@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop.web;
 
 import org.springframework.stereotype.Controller;
@@ -21,3 +22,4 @@ public class HomeController {
     }
 
 }
+*/

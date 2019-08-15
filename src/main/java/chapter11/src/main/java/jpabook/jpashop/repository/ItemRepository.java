@@ -1,3 +1,4 @@
+/*
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.item.Item;
@@ -7,10 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+*/
 /**
  * User: HolyEyE
  * Date: 2013. 12. 3. Time: 오후 9:48
- */
+ *//*
+
 
 @Repository
 public class ItemRepository {
@@ -34,3 +37,4 @@ public class ItemRepository {
         return em.createQuery("select i from Item i",Item.class).getResultList();
     }
 }
+*/

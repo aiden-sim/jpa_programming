@@ -1,10 +1,13 @@
+/*
 package jpabook.jpashop.domain;
 
 import javax.persistence.Embeddable;
 
+*/
 /**
  * Created by holyeye on 2014. 3. 11..
- */
+ *//*
+
 @Embeddable
 public class Address {
 
@@ -76,3 +79,4 @@ public class Address {
         return result;
     }
 }
+*/
