@@ -23,7 +23,7 @@
         <!-- querydsl -->
         <querydsl.version>4.1.4</querydsl.version>
         <!-- 스프링 프레임워크 버전 -->
-        <spring-framework.version>4.1.6.RELEASE</spring-framework.version>
+        <spring-framework.version>5.3.18</spring-framework.version>
         <!-- 데이터베이스 버전 -->
         <tomcat-jdbc.version>7.0.57</tomcat-jdbc.version>
         <!-- JSP, WEB 버전 -->
